@@ -68,7 +68,7 @@ When the first time of this interface is called for a specific order ID, a new a
 - **20**: The same as value 2, but the transaction is confirmed;
 - **9**: The transaction is canceled or failed;
 
-
+> Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
 
 
 
