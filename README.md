@@ -14,5 +14,12 @@ TERMS & DEFINITION
 2. order_price: format: amountCURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9USD, means 9.9 US Dollar, 0.23BTC, means 0.23 Bitcoin. ATTENTION: NO space between amount and symbol.
 3. coin_type: coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
 
-Merchant Api Supported Crypto: BTC|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC
+Merchant Api Supported Crypto: BTC|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC. 
 Merchant Api Supported Fiat: Almost all popular, USD, CNY, EUR, JPY, and other 100+
+
+
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
