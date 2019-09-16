@@ -17,23 +17,44 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
 
 Merchant Api Supported Crypto: 
-> BTC|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC. 
+> BTC|BTC_SW_D|BTC_SW_P|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC. (BTC for BTC legacy address (none-segwit, starts with 1), BTC_SW_D for BTC segwit default address (starts with bc1), BTC_SW_P for BTC segwit p2sh address (starts with 3))
 
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
 
 ### Api
 
-- **https://walletservice.bittool.com:14443/bitbill/merchant/cryptoInfoByOrderId** method: POST, POST data is in JSON format:
+- **https://walletservice.bittool.com:14443/bitbill/merchant/cryptoInfoByOrderId** 
+> Get crypto info by an order ID, method: POST, POST data is in JSON format:
 
 ```
-{"orderId":"order12345", "orderPrice":"9.9USD", "walletId":"rgfeqfi5quit", "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", "coinType":"BTC|LTC"}
+{"orderId":"order12345", "orderPrice":"9.9USD", "walletId":"rgfeqfi5quit", "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", "coinType":"BTC|BTC_SW_P|LTC"}
 ```
 
-Success Response:
+When the first time of this interface is called for a specific order ID, a new address for each requested coin types is allocated. Success Response:
 
 ```
-{"orderId":"order12345", "orderPrice":"9.9USD", "walletId":"rgfeqfi5quit", "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", "coinType":"BTC|LTC"}
+{
+  "orderId":"order12345", 
+  "BTC": {
+      "address": "1n2NpgP32GemjDY1xBcrgktXNYsJNNhvM",
+      "index": 12,   --> The BIP32 index for generating the address, example: m/44'/0'/0'/0/5, 5 is the index
+      "received": 0,  ---> in satoshi, if received 0.1 BTC, the value is 10000000
+      "status": 0  ---> value can be 0: received & unconfirmed, 1: received & confirmed, 2: ever received but canceled or failed
+   },
+  "BTC": {
+      "address": "3Mp9bmahViLyw9gMAVy4BWfBSvieUBEJJt",
+      "index": 2,
+      "received": 0,
+      "status": 0 
+   },
+   "LTC": {
+      "address": "LMwP5XFRd8vUfViH5gmzoTcKsCdAsQ7chs",
+      "index": 20,
+      "received": 0,
+      "status": 0 
+   }
+}
 ```
 
 
