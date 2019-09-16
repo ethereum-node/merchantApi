@@ -22,9 +22,18 @@ Merchant Api Supported Crypto:
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
 
+### Api
+
+- **https://walletservice.bittool.com:14443/bitbill/merchant/cryptoInfoByOrderId** method: POST, POST data is in JSON format:
 
 ```
-function test() {
-  console.log("notice the blank line before this function?");
-}
+{"orderId":"order12345", "orderPrice":"9.9USD", "walletId":"rgfeqfi5quit", "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", "coinType":"BTC|LTC"}
 ```
+
+Success Response:
+
+```
+{"orderId":"order12345", "orderPrice":"9.9USD", "walletId":"rgfeqfi5quit", "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", "coinType":"BTC|LTC"}
+```
+
+
