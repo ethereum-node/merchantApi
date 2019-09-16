@@ -8,7 +8,7 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 3. The customer paid, your Ownbit Merchant Wallet received the payment directly, and you can spend the received payment immediately, since you control the Ownbit Merchant Wallet fully.
 4. The Ownbit Platform call a callback_url (you provided when configuring the Ownbit Merchant Wallet) to notify your website that a payment is received (or a payment is canceled or failed in case of blockchain rollbacks).
 
-##TERMS & DEFINITION
+### TERMS & DEFINITION
 
 1. **order_id**: any string that identify an order, length: 1-64, must be unique among the system.
 2. **order_price**: format: amountCURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9USD, means 9.9 US Dollar, 0.23BTC, means 0.23 Bitcoin. ATTENTION: NO space between amount and symbol.
@@ -16,6 +16,7 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 
 Merchant Api Supported Crypto: 
 > BTC|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC. 
+
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
 
