@@ -39,22 +39,38 @@ When the first time of this interface is called for a specific order ID, a new a
   "BTC": {
       "address": "1n2NpgP32GemjDY1xBcrgktXNYsJNNhvM",
       "index": 12,   --> The BIP32 index for generating the address, example: m/44'/0'/0'/0/5, 5 is the index
+      "amount": "0.123", --> The amount for the specific coin (example is BTC) the customer should pay
       "received": 0,  ---> in satoshi, if received 0.1 BTC, the value is 10000000
-      "status": 0  ---> value can be 0: received & unconfirmed, 1: received & confirmed, 2: ever received but canceled or failed
+      "status": 0  ---> The status for current pay
    },
   "BTC": {
       "address": "3Mp9bmahViLyw9gMAVy4BWfBSvieUBEJJt",
       "index": 2,
+      "amount": "0.123",
       "received": 0,
       "status": 0 
    },
    "LTC": {
       "address": "LMwP5XFRd8vUfViH5gmzoTcKsCdAsQ7chs",
       "index": 20,
+      "amount": "17.826",
       "received": 0,
       "status": 0 
    }
 }
 ```
+
+**status** can have the following value:
+- **0**: Initial status, no payment;
+- **1**: Payment received, and the transaction is unconfirmed, the received value is less than what the order expected. Example, the order is expecting to receive 0.123BTC, but received 0.12999999BTC for the address;
+- **2**: Payment received, and the transaction is unconfirmed, the received value is equal or greater than what the order expected. Example, the order is expecting to receive 0.123BTC, and received 0.123BTC or 0.1231BTC;
+- **10**: The same as value 1, but the transaction is confirmed;
+- **20**: The same as value 2, but the transaction is confirmed;
+- **9**: The transaction is canceled or failed;
+
+
+
+
+
 
 
