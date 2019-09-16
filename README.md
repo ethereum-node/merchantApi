@@ -10,9 +10,10 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 
 ### TERMS & DEFINITION
 
-- **order_id**: any string that identify an order, length: 1-64, must be unique among the system.
-- **order_price**: format: amountCURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9USD, means 9.9 US Dollar, 0.23BTC, means 0.23 Bitcoin. ATTENTION: NO space between amount and symbol.
-- **coin_type**: coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
+- **orderId**: any string that identify an order, length: 1-64, must be unique among the system.
+- **orderPrice**: format: amountCURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9USD, means 9.9 US Dollar, 0.23BTC, means 0.23 Bitcoin. ATTENTION: NO space between amount and symbol.
+- **extendedKeysHash**: the MD5 hash of your Ownbit Merchat Wallet's BTC Extended Public Key, to authenticate a wallet. Can be found in your Ownbit Merchant Wallet's Wallet Configuration page.
+- **coinType**: coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
 
 Merchant Api Supported Crypto: 
 > BTC|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC. 
