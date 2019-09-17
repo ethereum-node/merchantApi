@@ -66,11 +66,35 @@ When the first time of this interface is called for a specific order ID, a new a
 
 **status** can have the following value:
 - **0**: Initial status, no payment;
-- **1**: Payment received, the received value is less than what the order expected. Example, the order is expecting to receive 0.123BTC, but received 0.12299999BTC for the address;
-- **2**: Payment received, the received value is equal or greater than what the order expected. Example, the order is expecting to receive 0.123BTC, and received 0.123BTC or 0.1231BTC;
+- **1**: Payment received, the received value is less than what the order expected. Example, the order is expecting to receive 0.123 BTC, but received 0.12299999 BTC for the address;
+- **2**: Payment received, the received value is equal or greater than what the order expected. Example, the order is expecting to receive 0.123 BTC, and received 0.123 BTC or 0.1231 BTC;
 - **9**: The transaction is canceled or failed;
 
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
+
+- **CALLBACK**
+> The Ownbit Platform will call the merchant's callback_url when payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
+
+```
+{
+  "orderId":"order12345", 
+  "orderPrice":"9.9 USD", 
+  "payment": {
+      "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
+      "coinType": "BTC",
+      "amount": "0.123", --> received amount 
+      "status": 2,
+      "confirmations": 0
+   }
+}
+```
+
+The Ownbit Platform expects a plain string: "OK" as the response. If the response is not OK, the platform will continuously to call in specific time slot, until it failed after 10 times. Example response:
+
+```
+OK
+```
+
 
 
 
