@@ -73,7 +73,7 @@ When the first time of this interface is called for a specific order ID, a new a
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
 
 - **CALLBACK**
-> The Ownbit Platform will call the merchant's callback_url when payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
+The Ownbit Platform will call the merchant's callback_url when payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
 
 ```
 {
