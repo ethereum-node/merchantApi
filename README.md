@@ -37,6 +37,8 @@ Merchant Api Supported Fiat:
 }
 ```
 
+> You should turn on the sepcific coin in your Ownbit Merchant Wallet before making the call.
+
 When the first time of this interface is called for a specific order ID, a new address for each requested coin types is allocated. Success Response:
 
 ```
@@ -72,7 +74,20 @@ When the first time of this interface is called for a specific order ID, a new a
 
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
 
-- **CALLBACK**
+- **Fee**
+
+The Ownbit Platform charges **0.5%** of transaction amount as the processing fee. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, no notification will be sent. And the Api will return the following error:
+
+```
+{
+  "orderId":"order12345", 
+  "orderPrice":"9.9 USD", 
+  "error": "Insufficient fee",
+  "code": -1
+}
+```
+
+- **Callback**
 
 The Ownbit Platform will call the merchant's callback_url to notify the merchant that a payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
 
