@@ -89,11 +89,16 @@ When the first time of this interface is called for a specific order ID, a new a
 }
 ```
 
-The Ownbit Platform expects a plain string: "OK" as the response. If the response is not OK, the platform will continuously to call in specific time slot, until it failed after 10 times. Example response:
+The Ownbit Platform expects a plain string: "SUCCESS" as the response. If the response is not SUCCESS, the platform will continuously to call in specific time gap, until it fails after 10 times. Example response:
 
 ```
-OK
+SUCCESS
 ```
+
+**Situations the callback is triggered** 
+- **Payment received/Unconfirmed**: status: 1/2, confirmations: 0;
+- **Payment Confirmed**: status: 1/2, confirmations: 1;
+- **Payment canceled or failed**: status: 9, confirmations: 0;
 
 
 
