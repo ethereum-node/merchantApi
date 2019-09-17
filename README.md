@@ -74,7 +74,7 @@ When the first time of this interface is called for a specific order ID, a new a
 
 - **CALLBACK**
 
-The Ownbit Platform will call the merchant's callback_url when payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
+The Ownbit Platform will call the merchant's callback_url to notify the merchant that a payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
 
 ```
 {
@@ -97,9 +97,20 @@ SUCCESS
 ```
 
 **Situations the callback is triggered** 
-- **Payment received/Unconfirmed**: status: 1/2, confirmations: 0;
-- **Payment Confirmed**: status: 1/2, confirmations: 1;
-- **Payment canceled or failed**: status: 9, confirmations: 0;
+- **A: Payment received/Unconfirmed**: status: 1/2, confirmations: 0;
+- **B: Payment Confirmed**: status: 1/2, confirmations: 1;
+- **C: Payment canceled or failed**: status: 9, confirmations: 0;
+
+The merchant might get multiple notifications for a payment. Possible notification cases are as follows:
+
+> CASE 1: A -> B (First get notification A, then get B, the pyament comes to unconfirmed first, and then unconfirmed)
+> CASE 2: B (the payment goes to confirmed directly, no unconfirmed state)
+> CASE 3: A -> C (the payment goes to unconfirmed, and then canceled)
+> CASE 4: A -> B -> C (the payment goes to unconfirmed, and then unconfirmed, but finally canceled)
+> CASE 5: B -> C (the payment goes to confirmed, and then canceled)
+> CASE 6: ... -> C -> B (the payment goes to canceled, but then goes to confirmed again , in case of blockchain rollback)
+
+The merchant should have a policy that always trust the last state. And the merchant should also has a mechanism to handle some unusual sutiation.
 
 
 
