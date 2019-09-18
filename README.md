@@ -78,7 +78,7 @@ When the first time of this interface is called for a specific order ID, a new a
 }
 ```
 
-> The "payment" block only exists when payment received.
+> The "payment" block only exists after payment received.
 
 **amount** rules:
 - **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all treated as invalid payments.
