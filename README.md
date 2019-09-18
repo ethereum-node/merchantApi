@@ -150,7 +150,7 @@ Ownbit suggests a general rule for merchants to follow:
 - **For UTXO based coins, like: BTC/BCH/LTC...**, merchants can trust **unconfirmed** payments when **rbf** is false. The merchant can ship the digital contents immediately in this sutiation.
 
 > - Unconfirmed payments with **rbf** equals to true, can be canceled in technical very easily. If merchants trust such payments, they should have a mechanism to get their goods back if the payments get canceled.  
-> - Merchants should get well prepared for handle notification status 9, to deal with payments cancelation.
+> - Merchants should get well prepared for handle notification of status 9, to deal with payments cancelation.
 
 
 
