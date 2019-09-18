@@ -73,7 +73,8 @@ When the first time of this interface is called for a specific order ID, a new a
       "coinType": "BTC",
       "amount": "0.123786", --> received amount 
       "status": 1,
-      "confirmations": 0
+      "confirmations": 0,
+      "rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
    }
 }
 ```
@@ -90,7 +91,7 @@ When the first time of this interface is called for a specific order ID, a new a
 - **0**: Initial status, no payment (or invalid payments received);
 - **1**: A valid payment is received, status: unconfirmed;
 - **2**: A valid payment is received, status: confirmed;
-- **9**: The transaction is canceled or failed;
+- **9**: The payment transaction is canceled or failed;
 
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
 
@@ -101,7 +102,7 @@ The Ownbit Platform charges **0.5%** of transaction amount as the processing fee
 ```
 {
   "orderId":"order12345", 
-  "orderPrice":"9.9 USD", 
+  "walletId":"rgfeqfi5quit", 
   "error": "Insufficient fee",
   "code": -1
 }
@@ -118,9 +119,10 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
   "payment": {
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
       "coinType": "BTC",
-      "amount": "0.123", --> received amount 
+      "amount": "0.123765", --> received amount 
       "status": 2,
-      "confirmations": 0
+      "confirmations": 1,
+      "rbf": false
    }
 }
 ```
@@ -132,20 +134,23 @@ SUCCESS
 ```
 
 **Situations the callback is triggered** 
-- **A: Payment received/Unconfirmed**: status: 1/2, confirmations: 0;
-- **B: Payment Confirmed**: status: 1/2, confirmations: 1;
+- **A: Payment received/Unconfirmed**: status: 1, confirmations: 0;
+- **B: Payment Confirmed**: status: 2, confirmations: 1;
 - **C: Payment canceled or failed**: status: 9, confirmations: 0;
 
 The merchant might get multiple notifications for a payment. Possible notification cases are as follows:
 
-> CASE 1: A -> B (First get notification A, then get B, the pyament comes to unconfirmed first, and then unconfirmed)  
+> CASE 1: A -> B (First get notification A, then get B, the pyament comes to unconfirmed first, and then confirmed)  
 > CASE 2: B (the payment goes to confirmed directly, no unconfirmed state)  
-> CASE 3: A -> C (the payment goes to unconfirmed, and then canceled)   
-> CASE 4: A -> B -> C (the payment goes to unconfirmed, and then unconfirmed, but finally canceled)  
-> CASE 5: B -> C (the payment goes to confirmed, and then canceled)  
-> CASE 6: ... -> C -> B (the payment goes to canceled, but then goes to confirmed again , in case of blockchain rollback)  
+> CASE 3: A -> C (the payment goes to unconfirmed, and then canceled)    
 
-The merchant should have a policy that always trust the last state. And the merchant should also has a mechanism to handle some unusual sutiation.
+**Trust Unconfirmed or Not?**
+Ownbit suggests a general rule for merchants to follow:
+- **For account based coins, like: ETH/USDT**, always trust **confirmed** payments only, ship your digital contents to your cusomter only after payment transaction get confirmed.
+- **For UTXO based coins, like: BTC/BCH/LTC...**, merchants can trust **unconfirmed** payments when **rbf** is false. The merchant can ship the digital contents immediately.
+
+> Unconfirmed payments with **rbf** equals to true, can be canceled in technical very easily. If merchants trust such payments, they should have a mechanism to get their goods back if the payments get canceled.  
+> Merchants should get well prepared for handle notification status 9, to deal with payments cancelation.
 
 
 
