@@ -81,7 +81,7 @@ When the first time of this interface is called for a specific order ID, a new a
 > The "payment" block only exists after payment received.
 
 **amount** rules:
-- **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all treated as invalid payments.
+- **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all be treated as invalid payments.
 - **For other coins**: The received amount should be **equal or greater than** requested. Example, the request is 0.123456 BTC, the payment is 0.123455 BTC, the payment treated as invalid, no payment info will be returned, and no notification will be sent.
 
 **The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
