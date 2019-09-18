@@ -17,7 +17,8 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
 
 Merchant Api Supported Crypto Coin Type: 
-> BTC|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC
+> BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC   
+> Note: Only ERC20 USDT supported
 
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
@@ -33,7 +34,7 @@ Merchant Api Supported Fiat:
   "orderPrice":"9.9 USD", 
   "walletId":"rgfeqfi5quit", 
   "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", 
-  "coinType":"BTC|LTC"
+  "coinType":"BTC|ETH|USDT|LTC"
 }
 ```
 
@@ -49,27 +50,46 @@ When the first time of this interface is called for a specific order ID, a new a
       "coinType": "BTC",
       "address": "3Mp9bmahViLyw9gMAVy4BWfBSvieUBEJJt",
       "index": 12,   --> The BIP32 index for generating the address, example: m/49'/0'/0'/0/5, 5 is the index
-      "amount": "0.123" --> The amount for the specific coin the customer should pay
+      "amount": "0.123786" --> The amount for the specific coin the customer should pay
+   },{
+      "coinType": "ETH",
+      "address": "0xd449a416328A3530715Bee067D93f7B672bd8553",
+      "index": 0,
+      "amount": "1.234782"
+   },{
+      "coinType": "USDT",
+      "address": "0xd449a416328A3530715Bee067D93f7B672bd8553",
+      "contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "index": 0,
+      "amount": "18.345301"
    },{
       "coinType": "LTC",
       "address": "LMwP5XFRd8vUfViH5gmzoTcKsCdAsQ7chs",
       "index": 20,
-      "amount": "17.826"
+      "amount": "17.826569"
    }],
    "payment": {
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
       "coinType": "BTC",
-      "amount": "0.123", --> received amount 
-      "status": 2,
+      "amount": "0.123786", --> received amount 
+      "status": 1,
       "confirmations": 0
    }
 }
 ```
 
+> The "payment" block only exists when payment received.
+
+**amount** rules:
+- **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all treated as invalid payments.
+- **For other coins**: The received amount should be **equal or greater than** requested. Example, the request is 0.123456 BTC, the payment is 0.123455 BTC, the payment treated as invalid, no payment info will be returned, and no notification will be sent.
+
+**The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
+
 **status** can have the following value:
-- **0**: Initial status, no payment;
-- **1**: Payment received, the received value is less than what the order expected. Example, the order is expecting to receive 0.123 BTC, but received 0.12299999 BTC for the address;
-- **2**: Payment received, the received value is equal or greater than what the order expected. Example, the order is expecting to receive 0.123 BTC, and received 0.123 BTC or 0.1231 BTC;
+- **0**: Initial status, no payment (or invalid payments received);
+- **1**: A valid payment is received, status: unconfirmed;
+- **2**: A valid payment is received, status: confirmed;
 - **9**: The transaction is canceled or failed;
 
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
