@@ -10,10 +10,9 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 
 ### TERMS & DEFINITION
 
+- **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet's Wallet Configuration page.
 - **orderId**: Any string that identify an order, length: 1-64, must be unique among the system.
 - **orderPrice**: Format: amount CURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
-- **walletId**: The Wallet ID you inputted when creating the Ownbit Merchant Wallet.
-- **extendedKeysHash**: The MD5 hash of your Ownbit Merchat Wallet's BTC Extended Public Key, to authenticate the wallet. Can be found in your Ownbit Merchant Wallet's Wallet Configuration page.
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
 
 Merchant Api Supported Crypto Coin Type: 
@@ -30,10 +29,9 @@ Merchant Api Supported Fiat:
 
 ```
 {
+  "apiKey":"8A3A5B18E94F166FD728B454ED63C1D1", 
   "orderId":"order12345", 
   "orderPrice":"9.9 USD", 
-  "walletId":"rgfeqfi5quit", 
-  "extendedKeysHash":"8A3A5B18E94F166FD728B454ED63C1D1", 
   "coinType":"BTC|ETH|USDT|LTC"
 }
 ```
@@ -96,16 +94,31 @@ When the first time of this interface is called for a specific order ID, a new a
 
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
 
+If something is wrong for processing, or the merchant passed the wrong parameters, the Api will return corresponding error code:
+
+```
+{
+  "message": <error message>,
+  "status": <error code>
+}
+```
+
+A list of error codes are:
+- **-1**: Insufficient fee
+- **-31**: Lack of madatory parameters
+- **-41**: Invalid Api Key
+- **-61**: Invalid Order Price
+- **-66**: Can't generate more address 
+
+
 - **Fee**
 
 The Ownbit Platform charges **0.5%** of transaction amount as the processing fee. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, no notification will be sent. And the Api will return the following error:
 
 ```
 {
-  "orderId":"order12345", 
-  "walletId":"rgfeqfi5quit", 
-  "error": "Insufficient fee",
-  "code": -1
+  "message": "Insufficient fee",
+  "status": -1
 }
 ```
 
