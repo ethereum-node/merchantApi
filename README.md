@@ -128,7 +128,7 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
 }
 ```
 
-The Ownbit Platform expects a plain string: "SUCCESS" as the response. If the response is not SUCCESS, the platform will continuously to call in specific time gap, until it fails after 10 times. Example response:
+The Ownbit Platform expects a plain string: "SUCCESS" as the response. If the response is not SUCCESS, the platform will continuously to call in specific time gap (30 secs, 1 min, 2 mins, 5 mins, 30 mins, 2 hours, 6 hours, 1 day), until it fails after 8 times. Example response:
 
 ```
 SUCCESS
