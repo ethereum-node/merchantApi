@@ -110,8 +110,7 @@ A list of error codes are:
 - **-61**: Invalid Order Price
 - **-66**: Can't generate more address 
 
-
-- **Fee**
+### Fee
 
 The Ownbit Platform charges **0.5%** of transaction amount as the processing fee. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, no notification will be sent. And the Api will return the following error:
 
@@ -122,7 +121,7 @@ The Ownbit Platform charges **0.5%** of transaction amount as the processing fee
 }
 ```
 
-- **Callback**
+### Callback
 
 The Ownbit Platform will call the merchant's callback_url to notify the merchant that a payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
 
