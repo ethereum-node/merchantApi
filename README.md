@@ -17,7 +17,7 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 
 Merchant Api Supported Crypto Coin Type: 
 > BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC   
-> Note: Only ERC20 USDT supported
+> Note: For USDT, only ERC20 supported
 
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
