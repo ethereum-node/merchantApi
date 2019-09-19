@@ -83,7 +83,8 @@ When the first time of this interface is called for a specific order ID, a new a
       "status": 1,
       "confirmations": 0,
       "rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
-   }
+   },
+   "status": 0
 }
 ```
 
@@ -113,7 +114,8 @@ If something is wrong for processing, or the merchant passed the wrong parameter
 }
 ```
 
-A list of error codes are:
+A list of status codes are:
+- **0**: success
 - **-1**: Insufficient fee
 - **-31**: Lack of madatory parameters
 - **-41**: Invalid Api Key
