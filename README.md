@@ -127,7 +127,7 @@ A list of status codes are:
 
 ### Fee
 
-The Ownbit Platform charges **2% - 0.5%** of transaction amount as the processing fee according to how much volume the merchant has processed. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, no notification will be sent. And the Api will return the following error:
+The Ownbit Platform charges **2% - 0.3%** of transaction volume as the processing fee according to how much volume the merchant has processed in total. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, no notification will be sent. And the Api will return the following error:
 
 ```
 {
