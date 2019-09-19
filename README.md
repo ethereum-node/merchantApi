@@ -119,6 +119,8 @@ A list of error codes are:
 - **-41**: Invalid Api Key
 - **-61**: Invalid Order Price
 - **-62**: Unsupported Fiat Currency
+- **-63**: Unsupported Coin Type
+- **-64**: Coin not open in corresponding Merchant Wallet
 - **-66**: Can't generate more address 
 
 ### Fee
