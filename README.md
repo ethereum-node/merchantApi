@@ -108,6 +108,7 @@ A list of error codes are:
 - **-31**: Lack of madatory parameters
 - **-41**: Invalid Api Key
 - **-61**: Invalid Order Price
+- **-62**: Unsupported Fiat Currency
 - **-66**: Can't generate more address 
 
 ### Fee
