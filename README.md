@@ -94,7 +94,7 @@ When the first time of this interface is called for a specific order ID, a new a
 
 > Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
 
-If something is wrong for processing, or the merchant passed the wrong parameters, the Api will return corresponding error code:
+If something is wrong for processing, or the merchant passed the wrong parameters, the Api returns corresponding error code:
 
 ```
 {
