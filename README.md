@@ -80,7 +80,7 @@ When the first time of this interface is called for a specific order ID, a new a
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
       "coinType": "BTC",
       "amount": "0.123786", --> received amount 
-      "status": 1,
+      "paymentStatus": 1,
       "confirmations": 0,
       "rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
    },
@@ -97,13 +97,13 @@ When the first time of this interface is called for a specific order ID, a new a
 
 **The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
 
-**status** can have the following value:
-- **0**: Initial status, no payment (or invalid payments received);
+**paymentStatus** can have the following value:
+- **0**: Initial status, no payment (or invalid payments);
 - **1**: A valid payment is received, status: unconfirmed;
 - **2**: A valid payment is received, status: confirmed;
 - **9**: The payment transaction is canceled or failed;
 
-> Note: The merchant should handle status 9 in a proper manner. Status 9 can happen even after a transaction is confirmed (in case of blockchain rollback).
+> Note: The merchant should handle paymentStatus 9 in a proper manner. paymentStatus 9 can happen even after a transaction is confirmed (in case of blockchain rollback, even though it is very rare).
 
 If something is wrong for processing, or the merchant passed the wrong parameters, the Api returns corresponding error code:
 
@@ -162,9 +162,9 @@ SUCCESS
 ```
 
 **Situations the callback is triggered** 
-- **A: Payment received/Unconfirmed**: status: 1, confirmations: 0;
-- **B: Payment Confirmed**: status: 2, confirmations: 1;
-- **C: Payment canceled or failed**: status: 9, confirmations: 0;
+- **A: Payment received/Unconfirmed**: paymentStatus: 1, confirmations: 0;
+- **B: Payment Confirmed**: paymentStatus: 2, confirmations: 1;
+- **C: Payment canceled or failed**: paymentStatus: 9, confirmations: 0;
 
 The merchant might get multiple notifications for a payment. Possible notification cases are as follows:
 
@@ -178,7 +178,7 @@ Ownbit suggests a general rule for merchants to follow:
 - **For UTXO based coins, like: BTC/BCH/LTC...**, merchants can trust **unconfirmed** payments when **rbf** is false. The merchant can ship the digital contents immediately in this sutiation.
 
 > - Unconfirmed payments with **rbf** equals to true, can be canceled in technical very easily. If merchants trust such payments, they should have a mechanism to get their goods back if the payments get canceled.  
-> - Merchants should get well prepared for handle notification of status 9, to deal with payments cancelation.
+> - Merchants should get well prepared for handle notification of paymentStatus 9, to deal with payments cancelation.
 
 
 
