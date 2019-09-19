@@ -38,6 +38,16 @@ Merchant Api Supported Fiat:
 
 > You should turn on the sepcific coin in your Ownbit Merchant Wallet before making the call.
 
+Another example with fixed crypto rate:
+
+```
+{
+  "apiKey":"8A3A5B18E94F166FD728B454ED63C1D1", 
+  "orderId":"order12345", 
+  "orderPrice":"0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
+}
+```
+
 When the first time of this interface is called for a specific order ID, a new address for each requested coin types is allocated. Success Response:
 
 ```
