@@ -57,24 +57,24 @@ When the first time of this interface is called for a specific order ID, a new a
   "crypto": [{
       "coinType": "BTC",
       "address": "3Mp9bmahViLyw9gMAVy4BWfBSvieUBEJJt",
-      "index": 12,   --> The BIP32 index for generating the address, example: m/49'/0'/0'/0/5, 5 is the index
-      "amount": "0.123786" --> The amount for the specific coin the customer should pay
+      "indexNo": 12,   --> The BIP32 index for generating the address, example: m/49'/0'/0'/0/5, 5 is the index
+      "requestedAmount": "0.123786" --> The amount for the specific coin the customer should pay
    },{
       "coinType": "ETH",
       "address": "0xd449a416328A3530715Bee067D93f7B672bd8553",
-      "index": 0,
-      "amount": "1.234782"
+      "indexNo": 0,
+      "requestedAmount": "1.234782"
    },{
       "coinType": "USDT",
       "address": "0xd449a416328A3530715Bee067D93f7B672bd8553",
       "contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-      "index": 0,
-      "amount": "18.345301"
+      "indexNo": 0,
+      "requestedAmount": "18.345301"
    },{
       "coinType": "LTC",
       "address": "LMwP5XFRd8vUfViH5gmzoTcKsCdAsQ7chs",
-      "index": 20,
-      "amount": "17.826569"
+      "indexNo": 20,
+      "requestedAmount": "17.826569"
    }],
    "payment": {
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
