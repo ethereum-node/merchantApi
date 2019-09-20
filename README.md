@@ -18,7 +18,10 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
 > orderHash = SHA256(walletId+orderId+orderPrice+apiKey)  
-> Example, apiKey = 8A3A5B18E94F166FD728B454ED63C1D1, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD, then: 
+> Example, apiKey = 8A3A5B18E94F166FD728B454ED63C1D1, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD
+
+then: 
+
 > orderHash = SHA256("r89fdk3mrf1dorder123459.9 USD8A3A5B18E94F166FD728B454ED63C1D1"); Note that space inside orderPrice is included in computing.
 
 Merchant Api Supported Crypto Coin Type: 
