@@ -121,8 +121,8 @@ A list of status codes are:
 - **0**: success
 - **-1**: Insufficient fee
 - **-31**: Lack of madatory parameters
-- **-41**: Wallet ID not exists
-- **-44**: Wallet Authentication Fail (Invalid Api Key)
+- **-41**: Invalid Api Key
+- **-44**: Wallet Authentication Fail (Wallet Id and Api Key mot match)
 - **-61**: Invalid Order Price
 - **-62**: Unsupported Fiat Currency
 - **-63**: Unsupported Coin Type
