@@ -173,7 +173,7 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
       "coinType": "BTC",
       "amount": "0.123765", --> received amount 
-      "status": 2,
+      "paymentStatus": 2,
       "confirmations": 1,
       "rbf": false
    }
