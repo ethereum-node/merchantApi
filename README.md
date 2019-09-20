@@ -10,11 +10,16 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 
 ### TERMS & DEFINITION
 
-- **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet's Wallet Configuration page.
+- **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet's Wallet Configuration page. ApiKey is used to compute the orderHash. Always keep apiKey secret.
 - **walletId**: Your Ownbit Merchant Wallet ID, you inputted when creating the Ownbit Wallet.
 - **orderId**: Any string that identify an order, length: 1-64, must be unique among the system.
 - **orderPrice**: Format: amount CURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
+- **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
+
+> orderHash = SHA256(walletId+orderId+orderPrice+apiKey)  
+> Example, apiKey = 8A3A5B18E94F166FD728B454ED63C1D1, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD, then: 
+> orderHash = SHA256("r89fdk3mrf1dorder123459.9 USD8A3A5B18E94F166FD728B454ED63C1D1"); Note that space inside orderPrice is included in computing.
 
 Merchant Api Supported Crypto Coin Type: 
 > BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC   
@@ -30,7 +35,7 @@ Merchant Api Supported Fiat:
 
 ```
 {
-  "apiKey":"8A3A5B18E94F166FD728B454ED63C1D1", 
+  "orderHash":"8daf0555487198d6ffbcbbf00aaecdff41082b696408382e965aad68606f6666", 
   "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"9.9 USD", 
@@ -44,7 +49,7 @@ Another example with fixed crypto rate:
 
 ```
 {
-  "apiKey":"8A3A5B18E94F166FD728B454ED63C1D1", 
+  "orderHash":"77f768a04a2811cd3e8491d2947871ae68685346eca175dc11897559ce7f3ae6", 
   "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
