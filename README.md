@@ -128,6 +128,7 @@ A list of status codes are:
 - **-63**: Unsupported Coin Type
 - **-64**: Coin not open in corresponding Merchant Wallet
 - **-66**: Can't generate more address 
+- **-67**: Merchant Account not exists
 
 ### Fee
 
