@@ -11,6 +11,7 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 ### TERMS & DEFINITION
 
 - **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet's Wallet Configuration page.
+- **walletId**: Your Ownbit Merchant Wallet ID, you inputted when creating the Ownbit Wallet.
 - **orderId**: Any string that identify an order, length: 1-64, must be unique among the system.
 - **orderPrice**: Format: amount CURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
@@ -30,6 +31,7 @@ Merchant Api Supported Fiat:
 ```
 {
   "apiKey":"8A3A5B18E94F166FD728B454ED63C1D1", 
+  "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"9.9 USD", 
   "coinType":"BTC|ETH|USDT|LTC"
@@ -43,6 +45,7 @@ Another example with fixed crypto rate:
 ```
 {
   "apiKey":"8A3A5B18E94F166FD728B454ED63C1D1", 
+  "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
 }
@@ -118,7 +121,8 @@ A list of status codes are:
 - **0**: success
 - **-1**: Insufficient fee
 - **-31**: Lack of madatory parameters
-- **-41**: Invalid Api Key
+- **-41**: Wallet ID not exists
+- **-44**: Wallet Authentication Fail (Invalid Api Key)
 - **-61**: Invalid Order Price
 - **-62**: Unsupported Fiat Currency
 - **-63**: Unsupported Coin Type
