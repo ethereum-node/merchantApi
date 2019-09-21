@@ -149,7 +149,7 @@ A list of status codes are:
 
 ### Fee
 
-The Ownbit Platform charges **2% - 0.3%** of transaction volume as the processing fee according to how much volume the merchant has processed in total. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, no notification will be sent. And the Api will return the following error:
+The Ownbit Platform charges **2% - 0.3%** of transaction volume as the processing fee according to how much volume the merchant has processed in total. And the fee must be deposited into your Ownbit Merchant Wallet before hand. If the current fee is insufficient, the Api will return the following error:
 
 ```
 {
@@ -197,9 +197,9 @@ SUCCESS
 ```
 
 **Situations the callback is triggered** 
-- **A: Payment received/Unconfirmed**: paymentStatus: 1, confirmations: 0;
-- **B: Payment Confirmed**: paymentStatus: 2, confirmations: 1;
-- **C: Payment canceled or failed**: paymentStatus: 9, confirmations: 0;
+- **A: A new payment is received;
+- **B: The unconfirmed payment becomes confirmed;
+- **C: A payment is canceled or failed;
 
 The merchant might get multiple notifications for a payment. Possible notification cases are as follows:
 
