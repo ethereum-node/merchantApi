@@ -18,11 +18,11 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
 > orderHash = SHA256(walletId+orderId+orderPrice+apiKey)  
-> Example, apiKey = 8A3A5B18E94F166FD728B454ED63C1D1, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD
+> Example, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD
 
 then: 
 
-> orderHash = SHA256("r89fdk3mrf1dorder123459.9 USD8A3A5B18E94F166FD728B454ED63C1D1"); Note that space inside orderPrice is included in computing.
+> orderHash = SHA256("r89fdk3mrf1dorder123459.9 USD11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
 
 Merchant Api Supported Crypto Coin Type: 
 > BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC   
@@ -38,7 +38,7 @@ Merchant Api Supported Fiat:
 
 ```
 {
-  "orderHash":"8daf0555487198d6ffbcbbf00aaecdff41082b696408382e965aad68606f6666", 
+  "orderHash":"35965aad663d44d9160fdaa68d35e8c06b6c8d2f49e962db361586b84b588628", 
   "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"9.9 USD", 
@@ -52,7 +52,7 @@ Another example with fixed crypto rate:
 
 ```
 {
-  "orderHash":"77f768a04a2811cd3e8491d2947871ae68685346eca175dc11897559ce7f3ae6", 
+  "orderHash":"d014052dc7227c4f03260c7936184e86ae66a5f68f8ba3fad4916c7502d2a069", 
   "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
