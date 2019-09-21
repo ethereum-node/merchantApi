@@ -177,6 +177,8 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
 
 **Note: Deposit enough fee in your Ownbit Merchant Wallet. The Ownbit Platform will stop calling the notification as long as the fee balance becomes less than 0.**
 
+**Note: When you deposite enough fee in your Ownbit Merchant Wallet, the missed notification will be sent again to callback_url automatically.**
+
 ```
 {
   "orderId":"order12345", 
