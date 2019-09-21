@@ -91,14 +91,14 @@ When the first time of this interface is called for a specific order ID, a new a
 			"indexNo": 0,
 			"requestedAmount": "37.950888"
 		}],
-    "payment": {
-      "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
-      "coinType": "BTC",
-      "amount": "0.003778", --> received amount 
-      "paymentStatus": 1,
-      "confirmations": 0,
-      "rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
-    },
+		"payment": {
+			"txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
+			"coinType": "BTC",
+			"amount": "0.003778", --> received amount 
+			"paymentStatus": 1,
+			"confirmations": 0,
+			"rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
+		},
 		"orderId": "order-example-0009",
 		"orderPrice": "270 CNY"
 	},
