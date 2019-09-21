@@ -175,6 +175,8 @@ Fee rate for different volume range :
 
 The Ownbit Platform will call the merchant's callback_url to notify the merchant that a payment state is changed. callback_url must be a POST interface. POST data is passed as the following:
 
+**Note: Deposit enough fee in your Ownbit Merchant Wallet. The Ownbit Platform will stop calling the notification as long as the fee balance becomes less than 0.**
+
 ```
 {
   "orderId":"order12345", 
