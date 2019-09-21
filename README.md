@@ -63,39 +63,47 @@ When the first time of this interface is called for a specific order ID, a new a
 
 ```
 {
-  "orderId":"order12345", 
-  "orderPrice":"9.9 USD", 
-  "crypto": [{
-      "coinType": "BTC",
-      "address": "3Mp9bmahViLyw9gMAVy4BWfBSvieUBEJJt",
-      "indexNo": 12,   --> The BIP32 index for generating the address, example: m/49'/0'/0'/0/5, 5 is the index
-      "requestedAmount": "0.123786" --> The amount for the specific coin the customer should pay
-   },{
-      "coinType": "ETH",
-      "address": "0xd449a416328A3530715Bee067D93f7B672bd8553",
-      "indexNo": 0,
-      "requestedAmount": "1.234782"
-   },{
-      "coinType": "USDT",
-      "address": "0xd449a416328A3530715Bee067D93f7B672bd8553",
-      "contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-      "indexNo": 0,
-      "requestedAmount": "18.345301"
-   },{
-      "coinType": "LTC",
-      "address": "LMwP5XFRd8vUfViH5gmzoTcKsCdAsQ7chs",
-      "indexNo": 20,
-      "requestedAmount": "17.826569"
-   }],
-   "payment": {
+	"data": {
+		"crypto": [{
+			"address": "353GjPxEY1kd14QD8XzMKRCvuv4XwhkpDK",
+			"coinType": "BTC",
+			"indexNo": 9,  --> The BIP32 index for generating the address, example: m/49'/0'/0'/0/5, 5 is the index
+			"requestedAmount": "0.003778"  --> The amount for the specific coin the customer should pay
+		}, {
+			"address": "qzpc2q53zres6eq32mc9a3ghque3urs8xvh9mq2f9x",
+			"coinType": "BCH",
+			"indexNo": 6,
+			"requestedAmount": "0.121193"
+		}, {
+			"address": "LUuqRpxZ43fqyxQxWxQZrxPuGLugb2h9FM",
+			"coinType": "LTC",
+			"indexNo": 2,
+			"requestedAmount": "0.510948"
+		}, {
+			"address": "0x3d0243Bba4eF808D9d98f8A6E7567a1e772Ef861",
+			"coinType": "ETH",
+			"indexNo": 0,
+			"requestedAmount": "0.1756324"
+		}, {
+			"address": "0x3d0243Bba4eF808D9d98f8A6E7567a1e772Ef861",
+			"coinType": "USDT",
+			"contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+			"indexNo": 0,
+			"requestedAmount": "37.950888"
+		}],
+    "payment": {
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
       "coinType": "BTC",
-      "amount": "0.123786", --> received amount 
+      "amount": "0.003778", --> received amount 
       "paymentStatus": 1,
       "confirmations": 0,
       "rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
-   },
-   "status": 0
+    },
+		"orderId": "order-example-0009",
+		"orderPrice": "270 CNY"
+	},
+	"message": "success",
+	"status": 0
 }
 ```
 
