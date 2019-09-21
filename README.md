@@ -197,9 +197,9 @@ SUCCESS
 ```
 
 **Situations the callback is triggered** 
-- **A: A new payment is received;
-- **B: The unconfirmed payment becomes confirmed;
-- **C: A payment is canceled or failed;
+- **A: A new payment is received;**
+- **B: The unconfirmed payment becomes confirmed;**
+- **C: A payment is canceled or failed;**
 
 The merchant might get multiple notifications for a payment. Possible notification cases are as follows:
 
