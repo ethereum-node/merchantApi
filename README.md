@@ -142,6 +142,7 @@ A list of status codes are:
 - **-62**: Unsupported Fiat Currency
 - **-63**: Unsupported Coin Type
 - **-64**: Coin not open in corresponding Merchant Wallet
+- **-65**: Order ID and Order Price not match (Fetch orderId again with non-empty orderPrice, but with the different value as the first fetch)
 - **-66**: Can't generate more address 
 - **-67**: Merchant Account not exists
 - **-68**: orderHash incorrect
