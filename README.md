@@ -178,6 +178,7 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
 ```
 {
   "orderId":"order12345", 
+  "orderPrice":"1000 USD",
   "payment": {
       "txHash": "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b",
       "coinType": "BTC",
