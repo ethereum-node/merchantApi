@@ -219,6 +219,31 @@ Ownbit suggests a general rule for merchants to follow:
 > - Unconfirmed payments with **rbf** equals to true, can be canceled in technical very easily. If merchants trust such payments, they should have a mechanism to get their goods back if the payments get canceled.  
 > - Merchants should get well prepared for handle notification of paymentStatus 9, to deal with payments cancelation.
 
+### Integrate Ownbit Pay Html Page (Optional)
+
+If you won't integrate /getCryptoByOrderId Api in low level, you can use Ownbit Pay Html Page directly. For each order, your customer open an URL similar like below for payment:
+
+https://ownbit.io/pay/?orderId=order-example-0034&orderPrice=1.3%20CNY&walletId=r81qipv5nd4x&orderHash=9b15c529ac275e30fce94c96fe40536a0533345da7b608dee26ba34f8bbc29f0&coinType=BTC%7CETH%7CUSDT%7CBCH%7CLTC%7CBSV%7CDASH%7CDOGE%7CDCR%7CZEC%7CDGB&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.
+
+**Parameters for Pay Html:**
+- **orderId**: same as /getCryptoByOrderId Api.
+- **orderPrice**: same as /getCryptoByOrderId Api.
+- **walletId**: same as /getCryptoByOrderId Api.
+- **orderHash**: same as /getCryptoByOrderId Api.
+- **coinType**: same as /getCryptoByOrderId Api.
+- **orderSubject**: The Subject for the order.
+- **orderDescription**: The description text for the order.
+
+**All parameters are URLEncoded. Example, an URLEncoded value of "1.3 CNY" is "1.3%20CNY"**
+JS code example for URLEncode:
+
+```
+// Encode a URI
+var param = "A pizza 8-10 inches with 6 slices";
+var encodedParam = encodeURI(param);
+// OUTPUT: A%20pizza%208-10%20inches%20with%206%20slices
+```
+
 
 
 
