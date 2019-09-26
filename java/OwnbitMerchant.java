@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.net.HttpURLConnection;
-import java.util.HashMap;
-import java.util.Map;
 import java.io.DataOutputStream;
 
 public class OwnbitMerchant {
@@ -23,10 +21,11 @@ public class OwnbitMerchant {
 		String orderHash = EncryptUtil.bytesToHex(Sha256Hash.hash(hashStr.getBytes()));
 		
 		JSONObject paramObj = new JSONObject();
-		paramObj.put("apiKey", OWNBIT_MERCHANT_API_KEY);
-		paramObj.put("walletId", orderPrice);
+		paramObj.put("orderPrice", orderPrice);
+		paramObj.put("walletId", OWNBIT_MERCHANT_WALLET_ID);
 		paramObj.put("orderId", orderId);
 		paramObj.put("orderHash", orderHash);
+		paramObj.put("coinType", "BTC|ETH|USDT|BCH|LTC|BSV|DASH|DOGE|DCR|DGB");
 		
 		String ret = callPost(OWNBIT_MERCHANT_API_URL, paramObj.toJSONString());
 		try {
@@ -180,8 +179,19 @@ public class OwnbitMerchant {
 		return null;
 	}
 	
-	public static void main(String[] args)throws Throwable{
+	public static void computeOrderhashExample() {
+		String orderId = "order-example-0034";
+		String orderPrice = "1.3 CNY";
+		String walletId = "r81qipv5nd4x";
+		String apiKey = "a40bc292e139b4f1b7f6ad94edd0d878";
 		
+		String hashStr = walletId + orderId + orderPrice + apiKey;
+		String recomputeOrderHash = EncryptUtil.bytesToHex(Sha256Hash.hash(hashStr.getBytes()));
+		System.out.println(recomputeOrderHash.toLowerCase());
+	}
+	
+	public static void main(String[] args)throws Throwable{
+		computeOrderhashExample();
 	}
 
 }
