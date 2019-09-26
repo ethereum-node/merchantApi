@@ -247,7 +247,7 @@ var encodedParam = encodeURI(param);
 
 ### Java code 
 
-**Java code for integrating /getCryptoByOrderId Api and orderHash computing in in the java directly.**
+**Java code for integrating /getCryptoByOrderId Api and orderHash computing is in the java directly.**
 
 
 
