@@ -25,8 +25,8 @@ then:
 > orderHash = SHA256("r89fdk3mrf1dorder123459.9 USD11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
 
 Merchant Api Supported Crypto Coin Type: 
-> BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|RVN|ZEN|XZC   
-> Note: For USDT, only ERC20 supported
+> BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB  
+> Note: USDT is for USDT ERC20.
 
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
