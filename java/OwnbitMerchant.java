@@ -10,8 +10,8 @@ import java.io.DataOutputStream;
 public class OwnbitMerchant {
 	
 	public static final String OWNBIT_MERCHANT_API_URL = "https://walletservice.bittool.com:14443/bitbill/merchant/getCryptoByOrderId";
-	public static final String OWNBIT_MERCHANT_API_KEY = "8A3A5B18E94F166FD728B454ED63C1D1";
-	public static final String OWNBIT_MERCHANT_WALLET_ID = "r89fdk3mrf1d";
+	public static final String OWNBIT_MERCHANT_API_KEY = "a40bc292e139b4f1b7f6ad94edd0d878";
+	public static final String OWNBIT_MERCHANT_WALLET_ID = "r81qipv5nd4x";
 	
 	public static void handleOrderExample() {
 		String orderId = "order-example-12345";
