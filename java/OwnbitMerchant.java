@@ -25,7 +25,7 @@ public class OwnbitMerchant {
 		paramObj.put("walletId", OWNBIT_MERCHANT_WALLET_ID);
 		paramObj.put("orderId", orderId);
 		paramObj.put("orderHash", orderHash);
-		paramObj.put("coinType", "BTC|ETH|USDT|BCH|LTC|BSV|DASH|DOGE|DCR|DGB");
+		paramObj.put("coinType", "BTC|ETH|USDT|LTC");
 		
 		String ret = callPost(OWNBIT_MERCHANT_API_URL, paramObj.toJSONString());
 		try {
