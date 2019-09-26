@@ -223,7 +223,7 @@ Ownbit suggests a general rule for merchants to follow:
 
 If you won't integrate /getCryptoByOrderId Api in low level, you can use Ownbit Pay Page directly. For each order, you open an URL similar like below for payment:
 
-https://ownbit.io/pay/?orderId=order-example-0034&orderPrice=1.3%20CNY&walletId=r81qipv5nd4x&orderHash=9b15c529ac275e30fce94c96fe40536a0533345da7b608dee26ba34f8bbc29f0&coinType=BTC%7CETH%7CUSDT%7CBCH%7CLTC%7CBSV%7CDASH%7CDOGE%7CDCR%7CZEC%7CDGB&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.&lang=cn
+https://ownbit.io/pay/?orderId=order-example-0034&orderPrice=1.3%20CNY&walletId=r81qipv5nd4x&orderHash=9b15c529ac275e30fce94c96fe40536a0533345da7b608dee26ba34f8bbc29f0&coinType=BTC%7CETH%7CUSDT%7CBCH&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.&lang=cn
 
 **Parameters for Pay Html:**
 - **orderId**: same as /getCryptoByOrderId Api.
