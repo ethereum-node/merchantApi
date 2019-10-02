@@ -179,7 +179,7 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
 
 **Note: When you deposite enough fee in your Ownbit Merchant Wallet, the missed notification will be resent to callback_url automatically.**
 
-**Set callback_url in your Ownbit Merchant Wallet -> Wallet Management -> Merchant Options.**
+**Note: Set callback_url in your Ownbit Merchant Wallet -> Wallet Management -> Merchant Options.**
 
 ```
 {
