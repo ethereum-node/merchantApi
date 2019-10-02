@@ -197,7 +197,7 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
 }
 ```
 
-**callbackHash** is used to verify that the call is really originated from the Ownbit Platform. The merchant side should recompute the callbackHash, and compare the one received in the request, to make sure the call is from Ownbit. The computing algorithm is as follows:
+**callbackHash** is used to verify that the call is really originated from the Ownbit Platform. The merchant side should recompute the callbackHash, and compare with the one received in the request, to make sure the call is from Ownbit. The computing algorithm is as follows:
 
 > callbackHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+txHash+":"+coinType+":"+amount+":"+paymentStatus+":"+confirmations+":"+rbf+":"+apiKey)  
 > In above example, if apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d
