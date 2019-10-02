@@ -17,12 +17,12 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
-> orderHash = SHA256(walletId+orderId+orderPrice+apiKey)  
+> orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey)  
 > Example, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD
 
 then: 
 
-> orderHash = SHA256("r89fdk3mrf1dorder123459.9 USD11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
+> orderHash = SHA256("r89fdk3mrf1d:order12345:9.9 USD:11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
 
 Merchant Api Supported Crypto Coin Type: 
 > BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB  
@@ -38,7 +38,7 @@ Merchant Api Supported Fiat:
 
 ```
 {
-  "orderHash":"35965aad663d44d9160fdaa68d35e8c06b6c8d2f49e962db361586b84b588628", 
+  "orderHash":"5d9153dbea146fb09bc87585cbef718114cc078321bb100fbda9c0a672b44568", 
   "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"9.9 USD", 
@@ -52,7 +52,7 @@ Another example with fixed crypto rate:
 
 ```
 {
-  "orderHash":"d014052dc7227c4f03260c7936184e86ae66a5f68f8ba3fad4916c7502d2a069", 
+  "orderHash":"c55018f9017078d833124c603be839194a91a9adbf61bf0de5d800ddc8e07be0", 
   "walletId": "r89fdk3mrf1d",
   "orderId":"order12345", 
   "orderPrice":"0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
@@ -190,9 +190,20 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
       "paymentStatus": 2,
       "confirmations": 1,
       "rbf": false
-   }
+   },
+   "callbackHash": "fc1e249e4595220f18c8298e1e5d261e352b4382a1d33c3ccc8342e94fd94be5"
 }
 ```
+
+**callbackHash** is used to verify that the call is really originated from the Ownbit Platform. It is dynamically computed for each callback. The computing algorithm is as follows:
+
+> callbackHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+txHash+":"+coinType+":"+amount+":"+paymentStatus+":"+confirmations+":"+rbf+":"+apiKey)  
+> In above example, if apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d
+
+then: 
+
+> callbackHash = SHA256("r89fdk3mrf1d:order12345:1000 USD:ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b:BTC:0.123765:2:1:0:11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.  
+> If **rbf** is true, use **1** for computing, otherwise use **0** for computing. 
 
 The Ownbit Platform expects a plain string: "SUCCESS" as the response. If the response is not SUCCESS, the platform will continuously to call the url in specific time gaps (30 secs, 1 min, 2 mins, 5 mins, 30 mins, 2 hours, 6 hours, 1 day and 2 days), until it fails after 10 times. Example response:
 
