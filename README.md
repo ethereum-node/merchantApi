@@ -10,7 +10,7 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 
 ### TERMS & DEFINITION
 
-- **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet's Wallet Configuration page. ApiKey is used to compute the orderHash. Always keep apiKey secret.
+- **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet -> Wallet Management -> Merchant Options. ApiKey is used to compute the orderHash. Always keep apiKey secret.
 - **walletId**: Your Ownbit Merchant Wallet ID, you inputted when creating the Ownbit Wallet.
 - **orderId**: Any string that identify an order, length: 1-64, must be unique among the system.
 - **orderPrice**: Format: amount CURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
@@ -177,7 +177,9 @@ The Ownbit Platform will call the merchant's callback_url to notify the merchant
 
 **Note: Deposit enough fee in your Ownbit Merchant Wallet. The Ownbit Platform will stop calling the notification as long as the fee balance becomes less than 0.**
 
-**Note: When you deposite enough fee in your Ownbit Merchant Wallet, the missed notification will be sent again to callback_url automatically.**
+**Note: When you deposite enough fee in your Ownbit Merchant Wallet, the missed notification will be resent to callback_url automatically.**
+
+**Set callback_url in your Ownbit Merchant Wallet -> Wallet Management -> Merchant Options.**
 
 ```
 {
