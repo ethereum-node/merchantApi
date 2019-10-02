@@ -222,7 +222,7 @@ The merchant might get multiple notifications for a payment. Possible notificati
 > CASE 2: B (the payment goes to confirmed directly, no unconfirmed state)  
 > CASE 3: A -> C (the payment goes to unconfirmed, and then canceled)    
 
-**Trust Unconfirmed or Not?**
+### Trust Unconfirmed or Not? 
 
 Sometime payments may take dozens of minute to confirm, should the merchant trust unconfirmed payments or not? If not trust unconfirmed payments, the customer may need to wait for long time to get the goods. It's not friendly in some cases especially for digital contents. But if we trust all unconfirmed payments, attackers can make use of this vulnerability, open a new order, get the goods, and then cancel or make the transaction invalid.
 
