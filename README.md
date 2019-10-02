@@ -112,7 +112,7 @@ When the first time of this interface is called for a specific order ID, a new a
 
 **amount** rules:
 - **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all be treated as invalid payments.
-- **For other coins**: The received amount should be **equal or greater than** requested. Example, the request is 0.123456 BTC, the payment is 0.123455 BTC, the payment treated as invalid, no payment info will be returned, and no notification will be sent.
+- **For other coins**: The received amount should be **equal or greater than** requested. Example, the request is 0.123456 BTC, the payment is 0.123455 BTC, it will be treated as invalid, no payment info will be returned, and no notification will be sent. If payment is 0.123456 BTC or 0.123457 BTC, then it will be treated as valid.
 
 **The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
 
@@ -228,9 +228,10 @@ Sometime payments may take dozens of minute to confirm, should the merchant trus
 
 To get around of this problem, Ownbit suggests a general rule for merchants to follow:
 - **For account based coins, like: ETH/USDT**, always trust **confirmed** payments only, ship your digital contents to your cusomter only after payment transaction get confirmed.
-- **For UTXO based coins, like: BTC/BCH/LTC...**, merchants can trust **unconfirmed** payments when **rbf** is false. The merchant can ship the digital contents immediately in this sutiation.
+- **For UTXO based coins, like: BTC/BCH/LTC...**, merchants can trust **unconfirmed** payments when **rbf** is false. The merchant can ship the digital contents immediately if rbf is false. 
 
 > - Unconfirmed payments with **rbf** equals to true, can be canceled in technical very easily. If merchants trust such payments, they should have a mechanism to get their goods back if the payments get canceled.  
+> - It's very difficult and very rare for unconfirmed payments get canceled if the rbf is false. But it's not to say impossible in theory. 
 > - Merchants should get well prepared for handle notification of paymentStatus 9, to deal with payments cancelation.
 
 ### Integrate Ownbit Pay Page (Optional)
