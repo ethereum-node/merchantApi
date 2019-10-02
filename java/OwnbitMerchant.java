@@ -12,12 +12,16 @@ public class OwnbitMerchant {
 	public static final String OWNBIT_MERCHANT_API_URL = "https://walletservice.bittool.com:14443/bitbill/merchant/getCryptoByOrderId";
 	public static final String OWNBIT_MERCHANT_API_KEY = "a40bc292e139b4f1b7f6ad94edd0d878";
 	public static final String OWNBIT_MERCHANT_WALLET_ID = "r81qipv5nd4x";
+	public static final String ENGLISH_SEMICOLON = ":";
 	
 	public static void handleOrderExample() {
 		String orderId = "order-example-12345";
 		String orderPrice = "128.35 AUD";
 		
-		String hashStr = OWNBIT_MERCHANT_WALLET_ID + orderId + orderPrice + OWNBIT_MERCHANT_API_KEY;
+		String hashStr = OWNBIT_MERCHANT_WALLET_ID + ENGLISH_SEMICOLON
+				+ orderId + ENGLISH_SEMICOLON
+				+ orderPrice + ENGLISH_SEMICOLON
+				+ OWNBIT_MERCHANT_API_KEY;
 		String orderHash = EncryptUtil.bytesToHex(Sha256Hash.hash(hashStr.getBytes()));
 		
 		JSONObject paramObj = new JSONObject();
@@ -185,9 +189,52 @@ public class OwnbitMerchant {
 		String walletId = "r81qipv5nd4x";
 		String apiKey = "a40bc292e139b4f1b7f6ad94edd0d878";
 		
-		String hashStr = walletId + orderId + orderPrice + apiKey;
+		String hashStr = walletId + ENGLISH_SEMICOLON
+				+ orderId + ENGLISH_SEMICOLON
+				+ orderPrice + ENGLISH_SEMICOLON
+				+ apiKey;
 		String recomputeOrderHash = EncryptUtil.bytesToHex(Sha256Hash.hash(hashStr.getBytes()));
 		System.out.println(recomputeOrderHash.toLowerCase());
+	}
+	
+	
+	/*
+	 * @return true if the callback is originated from Ownbit Platform, false otherwise
+	 */
+	public static boolean verifyCallbackHashExample(String callbackHash) {
+		if (callbackHash == null) {
+			return false;
+		}
+		
+		String orderId = "order-example-0034";
+		String orderPrice = "1000 USD";
+		String walletId = "r81qipv5nd4x";
+		String apiKey = "a40bc292e139b4f1b7f6ad94edd0d878";
+		
+		String txid = "ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b";
+		String coinType = "BTC";
+		String amount = "0.123765";
+		int paymentStatus = 2;
+		int confirmations = 1;
+		boolean rbf = false;
+		String callbackHashStr = walletId + ENGLISH_SEMICOLON
+				+ orderId  + ENGLISH_SEMICOLON
+				+ orderPrice  + ENGLISH_SEMICOLON
+				+ txid + ENGLISH_SEMICOLON
+				+ coinType + ENGLISH_SEMICOLON
+				+ amount + ENGLISH_SEMICOLON
+				+ paymentStatus + ENGLISH_SEMICOLON
+				+ confirmations + ENGLISH_SEMICOLON
+				+ (rbf ? 1 : 0) + ENGLISH_SEMICOLON
+				+ apiKey;
+		String recomputeCallbackHash = EncryptUtil.bytesToHex(Sha256Hash.hash(callbackHashStr.getBytes()));
+		System.out.println(recomputeCallbackHash.toLowerCase());
+		
+		if (callbackHash.equalsIgnoreCase(recomputeCallbackHash)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public static void main(String[] args)throws Throwable{
