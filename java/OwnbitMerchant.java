@@ -114,6 +114,10 @@ public class OwnbitMerchant {
 			return "ethereum";
 		} else if (coinType.contentEquals("USDT")) {
 			return "ethereum";
+		} else if (coinType.contentEquals("XRP")) {
+			return "ripple";
+		} else if (coinType.contentEquals("XLM")) {
+			return "stellar";
 		} else if (coinType.contentEquals("BCH")) {
 			return "bitcoincash";
 		} else if (coinType.contentEquals("LTC")) {
