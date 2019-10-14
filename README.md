@@ -207,10 +207,16 @@ then:
 > callbackHash = SHA256("r89fdk3mrf1d:order12345:1000 USD:ea6b0490a2e62d841677fc62cc1dd48eb987e8bc121c25ec0d4af9db116e6e9b:BTC:0.123765:2:1:0:11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.  
 > If **rbf** is true, use **1** for computing, otherwise use **0** for computing. 
 
-The Ownbit Platform expects a plain string: "SUCCESS" as the response. If the response is not SUCCESS, the platform will continuously to call the url in specific time gaps (30 secs, 1 min, 2 mins, 5 mins, 30 mins, 2 hours, 6 hours, 1 day and 2 days), until it fails after 10 times. Example response:
+The Ownbit Platform expects a plain string: "SUCCESS" or a JSON string contains "SUCCESS" as the response. If the response is not SUCCESS, the platform will continuously to call the url in specific time gaps (30 secs, 1 min, 2 mins, 5 mins, 30 mins, 2 hours, 6 hours, 1 day and 2 days), until it fails after 10 times. Example response:
 
 ```
 SUCCESS
+```
+
+or 
+
+```
+{"status":"SUCCESS"}
 ```
 
 **Situations the callback is triggered** 
