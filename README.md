@@ -136,7 +136,6 @@ If something is wrong for processing, or the merchant passed the wrong parameter
 A list of status codes are:
 - **0**: success
 - **-1**: Insufficient fee
-- **-20**: Invalid exchange rate for coin (Server side error)
 - **-31**: Lack of madatory parameters
 - **-41**: Wallet not exists
 - **-61**: Invalid Order Price
@@ -147,6 +146,7 @@ A list of status codes are:
 - **-66**: Can't generate more address 
 - **-67**: Merchant Account not exists
 - **-68**: orderHash incorrect
+- **-202**: Invalid exchange rate for coin (Server side error)
 
 ### Fee
 
