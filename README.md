@@ -108,7 +108,7 @@ When the first time of this interface is called for a specific order ID, a new a
 ```
 
 > The "payment" block only exists after a valid payment is received.  
-> If an order is not paid within 2 hours, the allocated address will be revoked and reused.
+> If an order is not paid within 24 hours, the allocated address will be revoked and reused.
 
 **amount** rules:
 - **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all be treated as invalid payments.
