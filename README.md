@@ -13,8 +13,9 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **apiKey**: The Api Key for your Ownbit Merchant Wallet. It can be found in your Ownbit Merchant Wallet -> Wallet Management -> Merchant Options. ApiKey is used to compute the orderHash. Always keep apiKey secret.
 - **walletId**: Your Ownbit Merchant Wallet ID, you inputted when creating the Ownbit Wallet.
 - **orderId**: Any string that identify an order, length: 1-64, must be unique among the system.
-- **orderPrice**: Format: amount CURRENCY_SYMBOL, can be both fiat and crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
+- **orderPrice**: Format: amount CURRENCY_SYMBOL, can be fiat or crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
 - **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
+- **minPaidRate**: (Optional)The minimum paid rate for an order. Can be a float value range: 0 - 1 (Default). Example: 0.95, means the minimum paid is 95% of the target amount.  
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
 > orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey)  
@@ -26,7 +27,7 @@ then:
 
 Merchant Api Supported Crypto Coin Type: 
 > BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB  
-> Note: USDT is for USDT ERC20.
+> Note: USDT is USDT-ERC20.
 
 Merchant Api Supported Fiat: 
 > Almost all popular, USD, CNY, EUR, JPY, and other 100+
@@ -38,11 +39,12 @@ Merchant Api Supported Fiat:
 
 ```
 {
-  "orderHash":"5d9153dbea146fb09bc87585cbef718114cc078321bb100fbda9c0a672b44568", 
+  "orderHash": "5d9153dbea146fb09bc87585cbef718114cc078321bb100fbda9c0a672b44568", 
   "walletId": "r89fdk3mrf1d",
-  "orderId":"order12345", 
-  "orderPrice":"9.9 USD", 
-  "coinType":"BTC|ETH|USDT|LTC"
+  "orderId": "order12345", 
+  "orderPrice": "9.9 USD", 
+  "coinType": "BTC|ETH|USDT|LTC",
+  "minPaidRate": 0.95
 }
 ```
 
@@ -52,10 +54,11 @@ Another example with fixed crypto rate:
 
 ```
 {
-  "orderHash":"c55018f9017078d833124c603be839194a91a9adbf61bf0de5d800ddc8e07be0", 
+  "orderHash": "c55018f9017078d833124c603be839194a91a9adbf61bf0de5d800ddc8e07be0", 
   "walletId": "r89fdk3mrf1d",
-  "orderId":"order12345", 
-  "orderPrice":"0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
+  "orderId": "order12345", 
+  "orderPrice": "0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate,
+  "minPaidRate": 1
 }
 ```
 
@@ -100,7 +103,8 @@ When the first time of this interface is called for a specific order ID, a new a
 			"rbf": false  --> whether the payment can be rbf (replaced-by-fee), only valid when confirmations is 0.
 		},
 		"orderId": "order-example-0009",
-		"orderPrice": "270 CNY"
+		"orderPrice": "270 CNY",
+		"minPaidRate": 0.98
 	},
 	"message": "success",
 	"status": 0
@@ -112,9 +116,9 @@ When the first time of this interface is called for a specific order ID, a new a
 
 **amount** rules:
 - **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all be treated as invalid payments.
-- **For other coins**: The received amount should be **equal or greater than** requested. Example, the request is 0.123456 BTC, the payment is 0.123455 BTC, it will be treated as invalid, no payment info will be returned, and no notification will be sent. If payment is 0.123456 BTC or 0.123457 BTC, then it will be treated as valid.
+- **For UTXO coins**: The received amount should be **equal or greater than** requested * **minPaidRate**. Example, the request is 0.123456 BTC and minPaidRate equals 1, the payment is 0.123455 BTC, it will be treated as invalid, no payment info will be returned, and no notification will be sent. If payment is 0.123456 BTC or 0.123457 BTC, then it will be treated as valid. When minPaidRate equals 0.98, the target amount will be: 0.123456 * 0.98 = 0.12098688 BTC, a payment of 0.123455 BTC will also be treated as valid.
 
-**The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
+**Note that minPaidRate only works for UTXO coins (not including ETH/USDT), for ETH/USDT, minPaidRate is always 1. The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
 
 **paymentStatus** can have the following value:
 - **0**: Initial status, no payment (or invalid payments);
@@ -247,7 +251,7 @@ To get around of this problem, Ownbit suggests a general rule for merchants to f
 
 If you won't integrate /getCryptoByOrderId Api in low level, you can use Ownbit Pay Page directly. For each order, you open an URL similar like below for payment:
 
-https://ownbit.io/pay/?orderId=order-online-example021&orderPrice=1.5%20CNY&walletId=rufjlwgw839y&orderHash=c3874b2026331480aa03aad691e0c0da080e1201c7ac7dab064c60e79d2d79eb&coinType=BTC%7CETH%7CUSDT%7CBCH%7CLTC%7CBSV%7CDASH%7CDOGE%7CDCR%7CDGB&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.&lang=en
+https://ownbit.io/pay/?orderId=order-online-example021&orderPrice=1.5%20CNY&minPaidRate=0.98&walletId=rufjlwgw839y&orderHash=c3874b2026331480aa03aad691e0c0da080e1201c7ac7dab064c60e79d2d79eb&coinType=BTC%7CETH%7CUSDT%7CBCH%7CLTC%7CBSV%7CDASH%7CDOGE%7CDCR%7CDGB&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.&lang=en
 
 **Parameters for Pay Page:**
 - **orderId**: same as /getCryptoByOrderId Api.
@@ -255,6 +259,7 @@ https://ownbit.io/pay/?orderId=order-online-example021&orderPrice=1.5%20CNY&wall
 - **walletId**: same as /getCryptoByOrderId Api.
 - **orderHash**: same as /getCryptoByOrderId Api.
 - **coinType**: same as /getCryptoByOrderId Api.
+- **minPaidRate**: same as /getCryptoByOrderId Api.
 - **orderSubject**: The Subject for the order.
 - **orderDescription**: The description text for the order.
 - **lang**: the page language, allowed values are:
