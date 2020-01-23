@@ -26,6 +26,8 @@ When parameter **minPaidRate** is **NOT** given:
 
 > orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey) 
 
+Examples:
+
 > Example 1, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD and minPaidRate is not given.
 
 > Example 2, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD and minPaidRate = 0.95.
