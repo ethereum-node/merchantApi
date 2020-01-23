@@ -116,7 +116,7 @@ When the first time of this interface is called for a specific order ID, a new a
 		},
 		"orderId": "order-example-0009",
 		"orderPrice": "270 CNY",
-		"minPaidRate": 0.95
+		"minPaidRate": 0.95  --> Optional
 	},
 	"message": "success",
 	"status": 0
