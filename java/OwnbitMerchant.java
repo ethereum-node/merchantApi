@@ -17,10 +17,13 @@ public class OwnbitMerchant {
 	public static void handleOrderExample() {
 		String orderId = "order-example-12345";
 		String orderPrice = "128.35 AUD";
+		//String minPaidRate = null;
+		Double minPaidRate = 0.95d;
 		
 		String hashStr = OWNBIT_MERCHANT_WALLET_ID + ENGLISH_SEMICOLON
 				+ orderId + ENGLISH_SEMICOLON
 				+ orderPrice + ENGLISH_SEMICOLON
+				+ (minPaidRate == null ? "" : minPaidRate + ENGLISH_SEMICOLON)
 				+ OWNBIT_MERCHANT_API_KEY;
 		String orderHash = EncryptUtil.bytesToHex(Sha256Hash.hash(hashStr.getBytes()));
 		
@@ -192,10 +195,12 @@ public class OwnbitMerchant {
 		String orderPrice = "1.3 CNY";
 		String walletId = "r81qipv5nd4x";
 		String apiKey = "a40bc292e139b4f1b7f6ad94edd0d878";
+		Double minPaidRate = null;//0.95d;
 		
 		String hashStr = walletId + ENGLISH_SEMICOLON
 				+ orderId + ENGLISH_SEMICOLON
 				+ orderPrice + ENGLISH_SEMICOLON
+				+ (minPaidRate == null ? "" : minPaidRate + ENGLISH_SEMICOLON)
 				+ apiKey;
 		String recomputeOrderHash = EncryptUtil.bytesToHex(Sha256Hash.hash(hashStr.getBytes()));
 		System.out.println(recomputeOrderHash.toLowerCase());
