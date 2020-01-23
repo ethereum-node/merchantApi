@@ -18,14 +18,22 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **minPaidRate**: (Optional)The minimum paid rate for an order. Can be a float value range: 0 - 1 (Default). Example: 0.95, means the minimum paid is 95% of the target amount.  
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
-> When parameter **minPaidRate** is given: orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+minPaidRate+":"+apiKey)  
-> When parameter **minPaidRate** is **NOT** given: orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey) 
+When parameter **minPaidRate** is given: 
+
+> orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+minPaidRate+":"+apiKey)  
+
+When parameter **minPaidRate** is **NOT** given: 
+
+> orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey) 
+
 > Example 1, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD and minPaidRate is not given.
+
 > Example 2, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD and minPaidRate = 0.95.
 
 then: 
 
 > orderHash(Example 1) = SHA256("r89fdk3mrf1d:order12345:9.9 USD:11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
+
 > orderHash(Example 2) = SHA256("r89fdk3mrf1d:order12345:9.9 USD:0.95:11f9eaff08754dac910d744449b7a377");
 
 Merchant Api Supported Crypto Coin Type: 
