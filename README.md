@@ -18,12 +18,15 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **minPaidRate**: (Optional)The minimum paid rate for an order. Can be a float value range: 0 - 1 (Default). Example: 0.95, means the minimum paid is 95% of the target amount.  
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
-> orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey)  
-> Example, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD
+> When parameter **minPaidRate** is given: orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+minPaidRate+":"+apiKey)  
+> When parameter **minPaidRate** is **NOT** given: orderHash = SHA256(walletId+":"+orderId+":"+orderPrice+":"+apiKey) 
+> Example 1, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD and minPaidRate is not given.
+> Example 2, apiKey = 11f9eaff08754dac910d744449b7a377, walletId = r89fdk3mrf1d, orderId = order12345, orderPrice = 9.9 USD and minPaidRate = 0.95.
 
 then: 
 
-> orderHash = SHA256("r89fdk3mrf1d:order12345:9.9 USD:11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
+> orderHash(Example 1) = SHA256("r89fdk3mrf1d:order12345:9.9 USD:11f9eaff08754dac910d744449b7a377"); Note that space inside orderPrice is included in computing.
+> orderHash(Example 2) = SHA256("r89fdk3mrf1d:order12345:9.9 USD:0.95:11f9eaff08754dac910d744449b7a377");
 
 Merchant Api Supported Crypto Coin Type: 
 > BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB  
@@ -50,15 +53,14 @@ Merchant Api Supported Fiat:
 
 > You should turn on the sepcific coin in your Ownbit Merchant Wallet before making the call.
 
-Another example with fixed crypto rate:
+Another example with fixed crypto rate (minPaidRate not given):
 
 ```
 {
   "orderHash": "c55018f9017078d833124c603be839194a91a9adbf61bf0de5d800ddc8e07be0", 
   "walletId": "r89fdk3mrf1d",
   "orderId": "order12345", 
-  "orderPrice": "0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate,
-  "minPaidRate": 1
+  "orderPrice": "0.12 BTC" --> ask the customer pay 0.12 BTC regardless of the exchange rate
 }
 ```
 
@@ -104,7 +106,7 @@ When the first time of this interface is called for a specific order ID, a new a
 		},
 		"orderId": "order-example-0009",
 		"orderPrice": "270 CNY",
-		"minPaidRate": 0.98
+		"minPaidRate": 0.95
 	},
 	"message": "success",
 	"status": 0
@@ -259,7 +261,7 @@ https://ownbit.io/pay/?orderId=order-online-example021&orderPrice=1.5%20CNY&minP
 - **walletId**: same as /getCryptoByOrderId Api.
 - **orderHash**: same as /getCryptoByOrderId Api.
 - **coinType**: same as /getCryptoByOrderId Api.
-- **minPaidRate**: same as /getCryptoByOrderId Api.
+- **minPaidRate**: (Optional)same as /getCryptoByOrderId Api.
 - **orderSubject**: The Subject for the order.
 - **orderDescription**: The description text for the order.
 - **lang**: the page language, allowed values are:
