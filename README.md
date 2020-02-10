@@ -39,7 +39,7 @@ then:
 > orderHash(Example 2) = SHA256("r89fdk3mrf1d:order12345:9.9 USD:0.95:11f9eaff08754dac910d744449b7a377");
 
 Merchant Api Supported Crypto Coins: 
-> **BTC|ETH|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|USDT|DAI|USDC|TUSD|PAX**
+- **BTC|ETH|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|USDT|DAI|USDC|TUSD|PAX**   
 > Note: USDT|DAI|USDC|TUSD|PAX are ERC20 tokens.
 
 Merchant Api Supported Fiat currency: 
