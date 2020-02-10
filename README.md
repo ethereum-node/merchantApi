@@ -127,10 +127,10 @@ When the first time of this interface is called for a specific order ID, a new a
 > If an order is not paid within 24 hours, the allocated address will be revoked and reused.
 
 **amount** rules:
-- **For ETH/USDT**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all be treated as invalid payments.
+- **For ETH/ERC20 tokens(USDT/DAI/USDC...)**: The received amount should be **exactly the same** as requested. Less or greater than requested will be treated as an invalid payment. Example, the requested amount is 1.234523 ETH, and the user paid 1.234524 ETH or 1.234522 ETH, will all be treated as invalid payments.
 - **For UTXO coins**: The received amount should be **equal or greater than** requested * **minPaidRate**. Example, the request is 0.123456 BTC and minPaidRate equals 1, the payment is 0.123455 BTC, it will be treated as invalid, no payment info will be returned, and no notification will be sent. If payment is 0.123456 BTC or 0.123457 BTC, then it will be treated as valid. When minPaidRate equals 0.98, the target amount will be: 0.123456 * 0.98 = 0.12098688 BTC, a payment of 0.123455 BTC will also be treated as valid.
 
-**Note that minPaidRate only works for UTXO coins (not including ETH/USDT), for ETH/USDT, minPaidRate is always 1. The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
+**Note that minPaidRate only works for UTXO coins (not including ETH/ERC20 tokens), for ETH/ERC20 tokens, minPaidRate is always 1. The Merchant's Payment UI should always ask the customer to pay the exact amount showing in the page.**
 
 **paymentStatus** can have the following value:
 - **0**: Initial status, no payment (or invalid payments);
@@ -252,7 +252,7 @@ The merchant might get multiple notifications for a payment. Possible notificati
 Sometime payments may take dozens of minute to confirm, should the merchant trust unconfirmed payments or not? If not trust unconfirmed payments, the customer may need to wait for long time to get the goods. It's not friendly in some cases especially for digital contents. But if we trust all unconfirmed payments, attackers can make use of this vulnerability, open a new order, get the goods, and then cancel or make the transaction invalid.
 
 To get around of this problem, Ownbit suggests a general rule for merchants to follow:
-- **For account based coins, like: ETH/USDT**, always trust **confirmed** payments only, ship your digital contents to your cusomter only after payment transaction get confirmed.
+- **For account based coins, like: ETH/ERC20 tokens(USDT/DAI/USDC...)**, always trust **confirmed** payments only, ship your digital contents to your cusomter only after payment transaction get confirmed.
 - **For UTXO based coins, like: BTC/BCH/LTC...**, merchants can trust **unconfirmed** payments when **rbf** is false. The merchant can ship the digital contents immediately if rbf is false. 
 
 > - Unconfirmed payments with **rbf** equals to true, can be canceled in technical very easily. If merchants trust such payments, they should have a mechanism to get their goods back if the payments get canceled.  
@@ -263,7 +263,7 @@ To get around of this problem, Ownbit suggests a general rule for merchants to f
 
 If you won't integrate /getCryptoByOrderId Api in low level, you can use Ownbit Pay Page directly. For each order, you open an URL similar like below for payment:
 
-https://ownbit.io/pay/?orderId=order-online-example021&orderPrice=1.5%20CNY&minPaidRate=0.98&walletId=rufjlwgw839y&orderHash=c3874b2026331480aa03aad691e0c0da080e1201c7ac7dab064c60e79d2d79eb&coinType=BTC%7CETH%7CUSDT%7CBCH%7CLTC%7CBSV%7CDASH%7CDOGE%7CDCR%7CDGB&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.&lang=en
+https://ownbit.io/pay/?orderId=order-online-example021&orderPrice=1.5%20CNY&minPaidRate=0.98&walletId=rufjlwgw839y&orderHash=c3874b2026331480aa03aad691e0c0da080e1201c7ac7dab064c60e79d2d79eb&coinType=BTC%7CETH%7CUSDT%7CBCH%7CLTC%7CDASH&orderSubject=Buy%20Pizza%20Online&orderDescription=A%20pizza%208-10%20inches%20with%206%20slices.&lang=en
 
 **Parameters for Pay Page:**
 - **orderId**: same as /getCryptoByOrderId Api.
