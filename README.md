@@ -14,7 +14,7 @@ Ownbit Merchant Wallet helps merchant accept Bitcoin & other cryptocurrencies fo
 - **walletId**: Your Ownbit Merchant Wallet ID, you inputted when creating the Ownbit Wallet.
 - **orderId**: Any string that identify an order, length: 1-64, must be unique among the system.
 - **orderPrice**: Format: amount CURRENCY_SYMBOL, can be fiat or crypto, example: 9.9 USD, means 9.9 US Dollar, 0.23 BTC, means 0.23 Bitcoin. ATTENTION: There's one space between amount and symbol.
-- **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC
+- **coinType**: Coin symbols separated by |, example: BTC|LTC|BSV|DASH, one coin only example: BTC.
 - **minPaidRate**: (Optional)The minimum paid rate for an order. Can be a float value range: 0 - 1 (Default). Example: 0.95, means the minimum paid is 95% of the target amount.  
 - **orderHash**: Used to authenticate the request. It is dynamically computed for each order. The computing algorithm is as follows:
 
@@ -38,12 +38,12 @@ then:
 
 > orderHash(Example 2) = SHA256("r89fdk3mrf1d:order12345:9.9 USD:0.95:11f9eaff08754dac910d744449b7a377");
 
-Merchant Api Supported Crypto Coin Type: 
-> BTC|ETH|USDT|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB  
-> Note: USDT is USDT-ERC20.
+Merchant Api Supported Crypto Coins: 
+> **BTC|ETH|BCH|LTC|BSV|DASH|ZEC|DOGE|DCR|DGB|USDT|DAI|USDC|TUSD|PAX**
+> Note: USDT|DAI|USDC|TUSD|PAX are ERC20 tokens.
 
-Merchant Api Supported Fiat: 
-> Almost all popular, USD, CNY, EUR, JPY, and other 100+
+Merchant Api Supported Fiat currency: 
+> Ownbit merchant API supports all fiat currencies, examples are: USD, CNY, EUR, JPY, AUD, etc.
 
 ### Api
 
